@@ -65,8 +65,9 @@ async function main() {
     });
 
     const port = Number(process.env.PORT) || 3000;
-    serve({ fetch: app.fetch, port }, () => {
-    console.log(`🚀 Server running on http://localhost:${port}`);
+    const hostname = process.env.HOST || "0.0.0.0";
+    serve({ fetch: app.fetch, port, hostname }, () => {
+    console.log(`🚀 Server running on http://${hostname}:${port}`);
     console.log(`📡 Using facilitator: ${facilitatorUrl}`);
     console.log(`💰 Payments go to: ${receivingAddress}`);
     console.log(`🔗 Network: ${network}`);
