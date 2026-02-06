@@ -5,6 +5,15 @@ import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import type { Network } from "@x402/core/types";
 import "dotenv/config";
+import { setGlobalDispatcher, ProxyAgent } from "undici";
+
+// for proxy support
+const proxy =
+  process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+
+if (proxy) {
+  setGlobalDispatcher(new ProxyAgent(proxy));
+}
 
 const app = new Hono();
 
